@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KerimMC | Minecraft Modları</title>
+
+    <link rel="icon" type="image/jpeg" href="Logo.jpeg">
+
+    <meta property="og:title" content="KerimMC | Minecraft Modları">
+    <meta property="og:description" content="En iyi Bedrock modları ve texture paketleri burada!">
+    <meta property="og:image" content="Logo.jpeg">
+
+    <style>
+        :root {
+            --bg-color: #0c0f14;
+            --panel-bg: #141923;
+            --card-bg: #1d2432;
+            --text-main: #f3f4f6;
+            --text-sub: #9ca3af;
+            --mc-green: #22c55e;
+            --mc-blue: #3b82f6;
+            --mc-red: #ef4444;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Profil Kısmı */
+        .profile-container {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 16px;
+            border: 3px solid var(--mc-green);
+            background: var(--panel-bg);
+        }
+
+        h1 {
+            margin: 10px 0 5px 0;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            color: var(--text-sub);
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Sosyal Medya Butonları */
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-btn {
+            background: var(--panel-bg);
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid #2d3748;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-btn:hover {
+            background: #1e2533;
+            border-color: var(--mc-blue);
+        }
+
+        .social-btn img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+
+        /* --- AKILLI REHBER PANELİ --- */
+        .accordion-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            background: var(--panel-bg);
+            border: 1px solid #232a38;
+            color: var(--text-main);
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .accordion-trigger:hover {
+            border-color: var(--mc-blue);
+            background: #1c2331;
+        }
+
+        .accordion-trigger .chevron {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: var(--text-sub);
+        }
+
+        .accordion-trigger.active .chevron {
+            transform: rotate(180deg);
+            color: white;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-top: 14px;
+            padding-bottom: 10px;
+        }
+
+        /* Geniş Rehber Butonları */
+        .info-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #181f2d, #141923);
+            border: 1px solid #232a38;
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--mc-blue), #60a5fa);
+        }
+
+        .info-btn.secondary::before {
+            background: linear-gradient(to bottom, #f59e0b, #fbbf24);
+        }
+
+        .info-btn:hover {
+            background: #1c2331;
+            border-color: var(--mc-blue);
+        }
+
+        .info-btn.secondary:hover {
+            border-color: #f59e0b;
+        }
+
+        .info-btn:hover::before {
+            width: 8px;
+        }
+
+        .info-btn .emoji {
+            font-size: 1.5rem;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-btn .text {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            text-align: left;
+        }
+
+        .info-btn .sub-text {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            font-weight: normal;
+        }
+
+        .info-btn .arrow {
+            color: var(--text-sub);
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+
+        .info-btn:hover .arrow {
+            transform: translateX(4px);
+            color: white;
+        }
+
+        /* Arama ve Zar Butonu Ortak Satırı */
+        .search-row {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 12px;
+            padding-right: 40px;
+            background: var(--panel-bg);
+            border: 1px solid #232a38;
+            border-radius: 10px;
+            color: white;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        #searchBar:focus {
+            outline: none;
+            border-color: var(--mc-blue);
+        }
+
+        .clear-search-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--mc-red);
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            padding: 0;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .clear-search-btn:hover {
+            color: #f87171;
+        }
+
+        /* 🎲 Sade, Tam Kare ve Şık Zar Butonu */
+        .random-btn {
+            background: var(--panel-bg);
+            color: white;
+            border: 1px solid #232a38;
+            width: 45px;
+            height: 43px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .random-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--mc-green);
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Sekme (Tab) Butonları */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: var(--panel-bg);
+            color: var(--text-sub);
+            border: 1px solid #232a38;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--mc-blue);
+            color: white;
+            border-color: var(--mc-blue);
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: var(--text-sub);
+            color: var(--text-main);
+        }
+
+        /* Ana İçerik */
+        .main-content {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tab-content {
+            display: none;
+            width: 100%;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Mod Kartı */
+        .mod-card {
+            background: var(--panel-bg);
+            border-radius: 12px;
+            border: 1px solid #232a38;
+            transition: transform 0.2s, opacity 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .mod-card:hover {
+            transform: translateX(3px);
+            border-color: #2e3b52;
+        }
+
+        .mod-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            background-color: rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            margin: 14px 0 14px 14px;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
+        .mod-content {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .mod-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .mod-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .mod-version {
+            background: var(--mc-blue);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .mod-desc {
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin: 0 0 12px 0;
+        }
+
+        .download-btn {
+            display: block;
+            background: var(--mc-green);
+            color: #000;
+            text-align: center;
+            padding: 8px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .download-btn:hover {
+            background: #4ade80;
+        }
+
+        /* ⚠️ Hata Bildirme Linki */
+        .report-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            text-decoration: underline;
+            text-align: center;
+            transition: color 0.2s;
+        }
+
+        .report-link:hover {
+            color: var(--mc-red);
+        }
+
+        /* Butonlar ve Footer */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--mc-blue);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        footer {
+            text-align: center;
+            color: #4b5563;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            padding-bottom: 20px;
+        }
+
+        /* Şaka Butonu */
+        .secret-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: 0.3s;
+            z-index: 998;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .secret-btn:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .joke-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .joke-overlay img {
+            max-width: 80%;
+            border-radius: 20px;
+        }
+
+        /* 👤 Üst Profil / Oturum Alanı */
+        .top-auth-area {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 995;
+            display: inline-block;
+        }
+
+        .profile-trigger-btn {
+            background: var(--panel-bg);
+            border: 1px solid #232a38;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .profile-trigger-btn:hover {
+            border-color: var(--mc-blue);
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .auth-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .profile-trigger-btn:hover .auth-avatar {
+            border-color: var(--mc-green);
+        }
+
+        /* Dropdown Menü Kartı */
+        .auth-dropdown {
+            position: absolute;
+            top: 54px;
+            right: 0;
+            background: var(--panel-bg);
+            border: 1px solid #232a38;
+            border-radius: 12px;
+            width: 240px;
+            padding: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            display: none;
+            flex-direction: column;
+            animation: fadeInDropdown 0.2s ease-out;
+        }
+
+        @keyframes fadeInDropdown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-dropdown.active {
+            display: flex;
+        }
+
+        /* Giriş Yapılmamış Arayüzü */
+        .dropdown-logged-out {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .dropdown-title {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .auth-google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: white;
+            color: #1f2937;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .auth-google-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+        }
+
+        .auth-google-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Giriş Yapılmış Arayüzü */
+        .dropdown-logged-in {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dropdown-user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-large-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--mc-green);
+        }
+
+        .dropdown-user-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .dropdown-username {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dropdown-email {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dropdown-divider {
+            border: 0;
+            height: 1px;
+            background: #232a38;
+            margin: 4px 0;
+        }
+
+        .auth-logout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--mc-red);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .auth-logout-btn:hover {
+            background: var(--mc-red);
+            color: white;
+        }
+
+        /* 📱 Mobil Uyum (Responsive Design) */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px; /* Mobilde kenar boşluklarını daraltalım */
+            }
+
+            /* Sekmeleri yatay kaydırılabilir yapalım, böylece alta inip sıkışmazlar */
+            .tab-container {
+                overflow-x: auto;
+                padding-bottom: 8px;
+                -ms-overflow-style: none;  
+                scrollbar-width: none;  
+            }
+            .tab-container::-webkit-scrollbar {
+                display: none;
+            }
+            .tab-btn {
+                white-space: nowrap; /* Yazıların alt satıra inmesini engeller */
+                font-size: 0.9rem;
+                padding: 10px 14px;
+            }
+
+            /* Mod kartlarını mobilde daha kompakt hale getirelim */
+            .mod-image {
+                width: 90px;
+                height: 90px;
+                margin: 12px 0 12px 12px;
+            }
+
+            .mod-content {
+                padding: 12px;
+            }
+
+            .mod-title {
+                font-size: 1rem;
+            }
+
+            .mod-desc {
+                font-size: 0.8rem;
+                margin-bottom: 8px;
+            }
+
+            .download-btn {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+
+            .accordion-trigger {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+            }
+            
+            .top-auth-area {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .secret-btn {
+                top: 15px;
+                left: 15px;
+            }
+        }
+    </style>
+
+    <!-- 🔥 Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+</head>
+
+<body>
+
+    <!-- 👤 Üst Profil / Oturum Alanı -->
+    <div class="top-auth-area" id="topAuthArea">
+        <button class="profile-trigger-btn" id="profileTriggerBtn" onclick="toggleAuthDropdown(event)">
+            <img class="auth-avatar" id="authAvatar"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%239ca3af' viewBox='0 0 24 24'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E"
+                alt="Profil">
+        </button>
+
+        <div class="auth-dropdown" id="authDropdown">
+            <!-- Giriş Yapılmamışsa -->
+            <div class="dropdown-logged-out" id="dropdownLoggedOut">
+                <p class="dropdown-title">Hata bildirmek için Google hesabınızla giriş yapın.</p>
+                <button class="auth-google-btn" onclick="signInWithGoogle()">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="#4285F4"
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853"
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05"
+                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335"
+                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                    </svg>
+                    Google ile Giriş Yap
+                </button>
+            </div>
+            <!-- Giriş Yapılmışsa -->
+            <div class="dropdown-logged-in" id="dropdownLoggedIn">
+                <div class="dropdown-user-info">
+                    <img class="dropdown-large-avatar" id="dropdownAvatar" src="" alt="Avatar">
+                    <div class="dropdown-user-text">
+                        <span class="dropdown-username" id="dropdownName">Misafir</span>
+                        <span class="dropdown-email" id="dropdownEmail"></span>
+                    </div>
+                </div>
+                <hr class="dropdown-divider">
+                <button class="auth-logout-btn" onclick="signOutUser()">Çıkış Yap</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-container">
+        <img class="avatar" src="Logo.jpeg" alt="KerimMC">
+        <h1>KerimMC</h1>
+        <p class="subtitle">Minecraft Bedrock Mod ve Texture Pack </p>
+        <div class="social-grid">
+            <a href="https://www.youtube.com/@KerimMinecraft" target="_blank" class="social-btn"><img src="Youtube.png"
+                    alt="YT"> YouTube</a>
+            <a href="https://www.tiktok.com/@kerim.mc" target="_blank" class="social-btn"><img src="Tiktok.png"
+                    alt="TT"> TikTok</a>
+            <a href="https://whatsapp.com/channel/0029Vb5fdHO1yT228RdE3H2Q" target="_blank" class="social-btn"><img
+                    src="Whatsapp.png" alt="WP"> WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="accordion-wrapper">
+        <button class="accordion-trigger" onclick="toggleAccordion()">
+            <span>💡 Mod Yükleme & Terabox Rehberleri</span>
+            <span class="chevron">▼</span>
+        </button>
+        <div id="accordionContent" class="accordion-content">
+            <div class="accordion-inner">
+                <a href="https://youtube.com/shorts/XvZoWZrToIg?si=cxmgLPRpWjMIEfvo" target="_blank" class="info-btn">
+                    <span class="emoji">🧐</span>
+                    <span class="text">
+                        BURDAKİ MODLAR NASIL YÜKLENİR
+                        <span class="sub-text">Güncel rehber videosu yakında...</span>
+                    </span>
+                    <span class="arrow">➔</span>
+                </a>
+                <a href="https://youtube.com/shorts/XvZoWZrToIg?si=cxmgLPRpWjMIEfvo" target="_blank"
+                    class="info-btn secondary">
+                    <span class="emoji">📦</span>
+                    <span class="text">
+                        TERABOX NASIL KULLANILIR
+                        <span class="sub-text">Hızlı ve sorunsuz indirme yöntemi</span>
+                    </span>
+                    <span class="arrow">➔</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-row">
+        <div class="search-container">
+            <input type="text" id="searchBar" onkeyup="filterMods()" placeholder="🔍 Mod veya Texture ara...">
+            <button id="clearBtn" class="clear-search-btn" onclick="clearSearch()">×</button>
+        </div>
+        <button class="random-btn" onclick="luckyPick(event)">🎲</button>
+    </div>
+
+    <div class="tab-container">
+        <button id="btn-mods" class="tab-btn active" onclick="switchTab('mods')">🔥 Bedrock Modları</button>
+        <button id="btn-textures" class="tab-btn" onclick="switchTab('textures')">🎨 Texture Paketleri</button>
+        <button id="btn-actions" class="tab-btn" onclick="switchTab('actions')">🛠️ Actions & Stuff</button>
+    </div>
+
+    <div class="main-content">
+        <div id="section-mods" class="tab-content active"></div>
+        <div id="section-textures" class="tab-content"></div>
+        <div id="section-actions" class="tab-content"></div>
+    </div>
+
+    <button class="secret-btn" onclick="showJoke()">😏</button>
+    <div id="jokeOverlay" class="joke-overlay" onclick="hideJoke()">
+        <img src="Nah.png" alt="Şaka!">
+    </div>
+
+    <footer>© 2026 KerimMC - Tüm Hakları Saklıdır.</footer>
+
+    <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()">▲</button>
+
+    <script>
+        const FIREBASE_URL = "https://kerimmc-4f946-default-rtdb.firebaseio.com";
+
+        // 📦 Sitedeki Tüm Modlar, Texture Paketleri ve Animasyonlar
+        const ITEMS_DATA = [
+            // --- ACTIONS & STUFF (🛠️ Actions & Stuff) ---
+            {
+                id: "actions_stuff_1_9",
+                title: "Actions & Stuff 1.9",
+                category: "actions",
+                version: "Bedrock",
+                desc: "Karakter animasyonlarını ve hareketlerini geliştiren harika bir paket. Sürüm 1.9 ile en güncel Bedrock deneyimi!",
+                image: "Actions1.9.webp",
+                link: "https://1024terabox.com/s/1Tuh0HwU079EQOg0SWfAGXQ"
+            },
+            {
+                id: "actions_stuff_1_5",
+                title: "Actions & Stuff 1.5",
+                category: "actions",
+                version: "Bedrock",
+                desc: "Karakter animasyonlarını ve hareketlerini geliştiren harika bir paket. Sürüm 1.5 ile gelişmiş animasyon desteği.",
+                image: "Actions1.5.webp",
+                link: "https://1024terabox.com/s/1p0rTuXfc9pARqO-YYxjbEQ"
+            },
+            {
+                id: "actions_stuff_1_4",
+                title: "Actions & Stuff 1.4",
+                category: "actions",
+                version: "Bedrock",
+                desc: "Karakter animasyonlarını ve hareketlerini geliştiren harika bir paket. 1.4 sürümü ile geliştirilmiş stabilite.",
+                image: "Actions.webp",
+                link: "https://1024terabox.com/s/19NVVR51FgO-hMx8_7cY22g"
+            },
+            {
+                id: "actions_stuff_1_3",
+                title: "Actions & Stuff 1.3",
+                category: "actions",
+                version: "Bedrock",
+                desc: "Karakter animasyonlarını ve hareketlerini geliştiren harika bir paket. Karakter hareketlerinizi akıcı hale getiren 1.3 sürümü.",
+                image: "Actions.webp",
+                link: "https://1024terabox.com/s/1Qxv0sUzQNP_xjW5fcYhzlw"
+            },
+            {
+                id: "actions_stuff_1_2",
+                title: "Actions & Stuff 1.2",
+                category: "actions",
+                version: "Bedrock",
+                desc: "Karakter animasyonlarını ve hareketlerini geliştiren harika bir paket. 1.2 sürümü ile klasik Minecraft animasyonları.",
+                image: "Actions.webp",
+                link: "https://1024terabox.com/s/1-z9NUS0XHIzth-WJXP0qpQ"
+            },
+            {
+                id: "actions_stuff_1_1",
+                title: "Actions & Stuff 1.1",
+                category: "actions",
+                version: "Bedrock",
+                desc: "Karakter animasyonlarını ve hareketlerini geliştiren harika bir paket. Serinin ilk ve nostaljik 1.1 sürümü.",
+                image: "Actions.webp",
+                link: "https://1024terabox.com/s/1ysZmDfOkg2E8nWKFJ6V5Kg"
+            },
+
+            // --- BEDROCK MODLARI (🔥 Bedrock Modları) ---
+            {
+                id: "java_combat",
+                title: "Java Combat",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "Combat.webp",
+                link: "https://1024terabox.com/s/1Li6abGI4_ZVxXYKWcEVA_w"
+            },
+            {
+                id: "essentials_3x3_kirma",
+                title: "Essentials/3x3 Kırma Modu",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "Essential.webp",
+                link: "https://1024terabox.com/s/1YOD4cRpM-f_0-q-PukS9WA"
+            },
+            {
+                id: "agac_kirma",
+                title: "Ağaç Kırma Modu",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "Ağaç.webp",
+                link: "https://1024terabox.com/s/1zo540d0csl7XN_x2SKar1Q"
+            },
+            {
+                id: "force_spectator",
+                title: "Force Spectator/Hilesiz İzleyici Modu",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "İzleme.webp",
+                link: "https://1024terabox.com/s/1sgGjHgWoO9Ju8PfaUjVEnw"
+            },
+            {
+                id: "better_ores",
+                title: "Better Ores",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "Ores.webp",
+                link: "https://1024terabox.com/s/1a5CndqpWydJL6TkY9CsZBQ"
+            },
+            {
+                id: "nizam_no_damage",
+                title: "Nizam's No Damage",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "damage.webp",
+                link: "https://1024terabox.com/s/1OJ1rTrYO8anDWKSqlel1mA"
+            },
+            {
+                id: "mcpe_freecam",
+                title: "MCPE Freecam",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "Freecam.webp",
+                link: "https://1024terabox.com/s/1RCx6KSw43VsYsIgbIr0SZQ"
+            },
+            {
+                id: "easy_xp",
+                title: "Easy Xp",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "Xp.webp",
+                link: "https://1024terabox.com/s/1_k-yfVemWA9Tp1qDNAnSSw"
+            },
+            {
+                id: "night_vision_mod",
+                title: "Night Vision Mod",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "nightaddon.webp",
+                link: "https://1024terabox.com/s/15NLNn5CCl_U_t8O2HoDqnA"
+            },
+            {
+                id: "keep_inventory",
+                title: "Keep Inventory/Envanteri Koru Pack",
+                category: "mods",
+                version: "Bedrock",
+                desc: "",
+                image: "Keep.webp",
+                link: "https://1024terabox.com/s/1Naj-HieVZJ5-DFhVAwqxCA"
+            },
+
+            // --- TEXTURE PAKETLERİ (🎨 Texture Paketleri) ---
+            {
+                id: "sodium_fps_booster",
+                title: "Sodium Fps Booster",
+                category: "textures",
+                version: "Bedrock",
+                desc: "",
+                image: "Sodium.webp",
+                link: "https://1024terabox.com/s/17JSlV4YBapkB5CvBeH-Ltg"
+            },
+            {
+                id: "night_vision_pack",
+                title: "Night Vision Pack/Gece Görüşü",
+                category: "textures",
+                version: "Bedrock",
+                desc: "",
+                image: "nightpack.webp",
+                link: "https://1024terabox.com/s/199n1ogwc62H9vRoMEJOYGQ"
+            },
+            {
+                id: "rgb_outline",
+                title: "RGBOutline/Beyaz Blok Çerçevesi",
+                category: "textures",
+                version: "Bedrock",
+                desc: "",
+                image: "Outline.webp",
+                link: "https://1024terabox.com/s/1te-WTuHkS25vZEeZRrLoNg"
+            },
+            {
+                id: "clear_pause",
+                title: "Clear Pause",
+                category: "textures",
+                version: "Bedrock",
+                desc: "",
+                image: "Clear.webp",
+                link: "https://1024terabox.com/s/1VVKftVDSm_akT-hCSCbxDQ"
+            }
+        ];
+
+        // 🖌️ Modları ve Paketleri HTML'e Dinamik Basan Fonksiyon
+        function renderItems() {
+            const sections = {
+                mods: document.getElementById('section-mods'),
+                textures: document.getElementById('section-textures'),
+                actions: document.getElementById('section-actions')
+            };
+
+            // Taşıyıcıları temizle
+            sections.mods.innerHTML = '';
+            sections.textures.innerHTML = '';
+            sections.actions.innerHTML = '';
+
+            ITEMS_DATA.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'mod-card';
+                card.dataset.id = item.id;
+
+                const btnText = item.category === 'textures' || item.category === 'actions' ? '📥 Paketi İndir' : '📥 Modu İndir';
+
+                card.innerHTML = `
+                    <img src="${item.image || 'Logo.jpeg'}" class="mod-image" alt="${item.title}">
+                    <div class="mod-content">
+                        <div class="mod-header">
+                            <p class="mod-title">${item.title}</p>
+                            <span class="mod-version">${item.version}</span>
+                        </div>
+                        <p class="mod-desc">${item.desc || 'Açıklama yakında eklenecektir...'}</p>
+                        <a href="${item.link}" target="_blank" class="download-btn">${btnText}</a>
+                        <span class="report-link" onclick="reportError('${item.title}')">⚠️ Mod Çalışmıyor mu? Bildir</span>
+                    </div>
+                `;
+
+                if (sections[item.category]) {
+                    sections[item.category].appendChild(card);
+                }
+            });
+        }
+
+        // Sayfa ilk yüklendiğinde render et
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderItems);
+        } else {
+            renderItems();
+        }
+
+        // 🔥 Firebase Başlatma
+        const firebaseConfig = {
+            apiKey: "AIzaSyBftOpDWP8I0bSxbSVGdmk8Tg_pniTOsqI",
+            authDomain: "kerimmc-4f946.firebaseapp.com",
+            databaseURL: "https://kerimmc-4f946-default-rtdb.firebaseio.com",
+            projectId: "kerimmc-4f946",
+            storageBucket: "kerimmc-4f946.firebasestorage.app",
+            messagingSenderId: "317208439051",
+            appId: "1:317208439051:web:f626e9106d91681d775a0e"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const firebaseDB = firebase.database();
+
+        // 👤 Kullanıcı giriş durumunu izle
+        const defaultAvatar = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%239ca3af' viewBox='0 0 24 24'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
+
+        auth.onAuthStateChanged(function (user) {
+            const dropdown = document.getElementById('authDropdown');
+            dropdown.classList.remove('active');
+
+            if (user) {
+                document.getElementById('dropdownLoggedOut').style.display = 'none';
+                document.getElementById('dropdownLoggedIn').style.display = 'flex';
+
+                const photo = user.photoURL || 'Logo.jpeg';
+                document.getElementById('authAvatar').src = photo;
+                document.getElementById('dropdownAvatar').src = photo;
+                document.getElementById('dropdownName').textContent = user.displayName || 'Kullanıcı';
+                document.getElementById('dropdownEmail').textContent = user.email || '';
+            } else {
+                document.getElementById('dropdownLoggedOut').style.display = 'flex';
+                document.getElementById('dropdownLoggedIn').style.display = 'none';
+
+                document.getElementById('authAvatar').src = defaultAvatar;
+            }
+        });
+
+        function toggleAuthDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('authDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Dışarı tıklanınca dropdown'ı kapat
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('authDropdown');
+            const trigger = document.getElementById('profileTriggerBtn');
+            if (dropdown && !dropdown.contains(event.target) && event.target !== trigger && !trigger.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        function signInWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).catch(err => {
+                alert('Giriş sırasında hata oluştu. Sitenin bir sunucudan açık olduğundan emin olun.');
+            });
+        }
+
+        function signOutUser() {
+            auth.signOut();
+        }
+
+        function toggleAccordion() {
+            let trigger = document.querySelector('.accordion-trigger');
+            let content = document.getElementById('accordionContent');
+            trigger.classList.toggle('active');
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        function getLevenshteinDistance(a, b) {
+            let matrix = [];
+            for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+            for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+            for (let i = 1; i <= b.length; i++) {
+                for (let j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
+            return matrix[b.length][a.length];
+        }
+
+        function resetCardStyles() {
+            document.querySelectorAll('.mod-card').forEach(c => {
+                c.style.opacity = "1";
+                c.style.boxShadow = "none";
+                c.style.borderColor = "#232a38";
+            });
+        }
+
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.mod-card') && !event.target.closest('.random-btn')) {
+                resetCardStyles();
+            }
+        });
+
+        function filterMods() {
+            resetCardStyles();
+            let rawInput = document.getElementById('searchBar').value.toLowerCase().trim();
+            let input = rawInput.replace(/&/g, 'and');
+
+            let cards = document.querySelectorAll('.mod-card');
+            let tabContainer = document.querySelector('.tab-container');
+            let tabContents = document.querySelectorAll('.tab-content');
+            let clearBtn = document.getElementById('clearBtn');
+
+
+            if (rawInput !== "") {
+                clearBtn.style.display = "block";
+                tabContainer.style.display = "none";
+
+                tabContents.forEach(c => c.style.display = "block");
+
+                cards.forEach(card => {
+                    let rawTitle = card.querySelector('.mod-title').innerText.toLowerCase();
+                    let rawVersion = card.querySelector('.mod-version') ? card.querySelector('.mod-version').innerText.toLowerCase() : "";
+                    let rawDesc = card.querySelector('.mod-desc') ? card.querySelector('.mod-desc').innerText.toLowerCase() : "";
+
+                    let searchString = `${rawTitle} ${rawVersion} ${rawDesc}`.replace(/&/g, 'and');
+                    let isMatch = searchString.includes(input);
+
+                    if (!isMatch && input.length > 2) {
+                        let titleWords = searchString.split(" ");
+                        let inputWords = input.split(" ");
+
+                        isMatch = inputWords.every(inWord => {
+                            if (inWord.length < 3) return searchString.includes(inWord);
+
+                            // Sayılar ve sürüm numaraları (örn: 1.9, 1.21) için Levenshtein (fuzzy) arama yapılmasın, birebir eşleşsin
+                            if (/^[0-9.]+$/.test(inWord)) {
+                                return searchString.includes(inWord);
+                            }
+
+                            return titleWords.some(tWord => {
+                                let distance = getLevenshteinDistance(tWord, inWord);
+                                let allowedError = inWord.length > 5 ? 2 : 1;
+                                return distance <= allowedError;
+                            });
+                        });
+                    }
+                    card.style.display = isMatch ? "flex" : "none";
+                });
+            } else {
+                clearBtn.style.display = "none";
+                tabContainer.style.display = "";
+                tabContents.forEach(c => { c.style.display = ""; });
+                cards.forEach(card => card.style.display = "");
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('searchBar').value = "";
+            filterMods();
+            document.getElementById('searchBar').focus();
+        }
+
+        function showJoke() { document.getElementById('jokeOverlay').style.display = 'flex'; }
+        function hideJoke() { document.getElementById('jokeOverlay').style.display = 'none'; }
+
+        function switchTab(tabName) {
+            resetCardStyles();
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('btn-' + tabName).classList.add('active');
+            document.getElementById('section-' + tabName).classList.add('active');
+        }
+
+        window.onscroll = function () {
+            var btn = document.getElementById("scrollTopBtn");
+            btn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "flex" : "none";
+        };
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        function luckyPick(event) {
+            event.stopPropagation();
+            let activeSection = document.querySelector('.tab-content.active');
+            let isSearching = document.getElementById('searchBar').value.trim() !== "";
+            let cards;
+
+            if (isSearching) {
+                cards = Array.from(document.querySelectorAll('.mod-card')).filter(c => c.style.display === "flex");
+            } else {
+                cards = activeSection.querySelectorAll('.mod-card');
+            }
+
+            if (cards.length === 0) return;
+
+            resetCardStyles();
+            let luckyCard = cards[Math.floor(Math.random() * cards.length)];
+
+            document.querySelectorAll('.mod-card').forEach(c => {
+                if (c.style.display !== "none" && c !== luckyCard) {
+                    c.style.opacity = "0.2";
+                }
+            });
+
+            luckyCard.style.boxShadow = "0 0 25px #22c55e";
+            luckyCard.style.borderColor = "#22c55e";
+            luckyCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function slugify(text) {
+            return text.toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]/g, '_')
+                .replace(/__+/g, '_');
+        }
+
+        // ⚠️ AKILLI SÜRÜM TABANLI KİLİT SİSTEMİ (Firebase SDK & Güvenli Sayaç Entegrasyonu)
+        function reportError(modName) {
+            let user = auth.currentUser;
+            if (!user) {
+                alert("⚠️ Hata bildirmek için lütfen sağ üst köşeden Google hesabınızla giriş yapın.");
+                return;
+            }
+
+            let modID = slugify(modName);
+
+            // Fetch yerine sayfada zaten tanımlı olan firebaseDB SDK'sını kullanıyoruz.
+            // Böylece kullanıcının Google oturum token'ı otomatik eklenir ve kurallara takılmaz.
+            firebaseDB.ref(`versions/${modID}`).once('value')
+                .then(snapshot => {
+                    let currentServerVersion = snapshot.val() || 0;
+                    let localKey = `reported_v_${modID}`;
+                    let userSavedVersion = localStorage.getItem(localKey);
+
+                    if (userSavedVersion && parseInt(userSavedVersion) === currentServerVersion) {
+                        alert(`⚠️ Zaten bu mod için güncel bir rapor gönderdin kral. İlgin için teşekkürler!`);
+                        return;
+                    }
+
+                    let confirmReport = confirm(`"${modName}" son sürümde çalışmadı mı? Raporlamak istediğinize emin misiniz?`);
+
+                    if (confirmReport) {
+                        localStorage.setItem(localKey, currentServerVersion.toString());
+
+                        // transaction() kullanarak iki kişi aynı anda rapor verdiğinde sayaç bozulmaz veya birbirini ezmez
+                        firebaseDB.ref(`reports/${modID}`).transaction((currentValue) => {
+                            return (currentValue || 0) + 1;
+                        }, (error, committed, snapshot) => {
+                            if (error) {
+                                console.error(error);
+                                alert("Rapor iletilirken bir hata oluştu! Lütfen Firebase kurallarınızı kontrol edin.");
+                                localStorage.removeItem(localKey);
+                            } else if (committed) {
+                                alert(`✅ Hata şikayetiniz başarıyla alındı. İlginiz için çok teşekkür ederiz!`);
+                            }
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Bağlantı hatası, lütfen tekrar deneyin!");
+                });
+        }
+
+    </script>
+
+    <!-- Sohbet arayüzü kaldırıldı -->
+
+</body>
+
+</html>
