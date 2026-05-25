@@ -786,11 +786,20 @@
         }
     </style>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCKSJF8705"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BCKSJF8705');
+    </script>
+
     <!-- 🔥 Firebase SDK (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
 </head>
 
 <body>
@@ -1159,7 +1168,6 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const firebaseDB = firebase.database();
-        const analytics = firebase.analytics();
 
         // 📈 Benzersiz Sayfa Ziyaretini Artır (Firebase - 24 Saatte Bir)
         if (firebaseDB) {
