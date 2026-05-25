@@ -790,6 +790,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
 </head>
 
 <body>
@@ -1152,11 +1153,13 @@
             projectId: "kerimmc-4f946",
             storageBucket: "kerimmc-4f946.firebasestorage.app",
             messagingSenderId: "317208439051",
-            appId: "1:317208439051:web:f626e9106d91681d775a0e"
+            appId: "1:317208439051:web:f626e9106d91681d775a0e",
+            measurementId: "G-BCKSJF8705"
         };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const firebaseDB = firebase.database();
+        const analytics = firebase.analytics();
 
         // 📈 Benzersiz Sayfa Ziyaretini Artır (Firebase - 24 Saatte Bir)
         if (firebaseDB) {
