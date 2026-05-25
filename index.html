@@ -781,29 +781,28 @@
         /* 📱 Sadece Çok Küçük Ekranlar (Telefonlar - 480px ve altı) için Sekme Kaydırma */
         @media (max-width: 480px) {
             .tab-container {
-                overflow-x: auto;
-                padding-bottom: 12px;
+                overflow-x: scroll; /* auto yerine scroll yaparak kaydırma çubuğunun kalıcı olmasını zorlayalım */
+                padding-bottom: 10px;
                 display: flex;
                 gap: 10px;
                 width: 100%;
                 justify-content: flex-start;
-                -ms-overflow-style: auto;  
-                scrollbar-width: thin;  
+                -webkit-overflow-scrolling: touch; /* iOS'ta akıcı kaydırmayı sağlar */
+                scrollbar-width: thin; /* Firefox için ince kaydırma çubuğu */
                 scrollbar-color: var(--mc-blue) var(--panel-bg);
-                border-bottom: 2px dashed #232a38; /* Şık Minecraft stili kesikli alt çizgi ipucu */
             }
-            /* Mobilde ince ve estetik bir kaydırma çubuğu göstererek sağa kaydığı anlaşılsın */
+            /* Mobilde ince, estetik ve kalıcı bir mavi kaydırma çubuğu gösterelim */
             .tab-container::-webkit-scrollbar {
-                display: block;
-                height: 4px;
+                display: block !important;
+                height: 5px; /* Kalınlığı 5px yaparak daha belirgin hale getirelim */
             }
             .tab-container::-webkit-scrollbar-track {
-                background: var(--bg-color);
-                border-radius: 2px;
+                background: var(--panel-bg); /* Koyu bir arka plan kontrastı oluşturur */
+                border-radius: 10px;
             }
             .tab-container::-webkit-scrollbar-thumb {
-                background: var(--mc-blue);
-                border-radius: 2px;
+                background: var(--mc-blue); /* Minecraft Mavisi kaydırma barı */
+                border-radius: 10px;
             }
             /* 3. sekmenin her telefonda mutlaka sağdan peş peşe taşarak peeking yapmasını sağlayalım */
             .tab-btn {
