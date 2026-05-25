@@ -12,7 +12,8 @@
     <meta name="author" content="KerimMC">
     <meta name="robots" content="index, follow">
 
-    <link rel="icon" type="image/jpeg" href="https://kerimmc1.github.io/kerimmc/Logo.jpeg">
+    <link rel="shortcut icon" href="https://kerimmc1.github.io/kerimmc/Logo.jpeg" type="image/x-icon">
+    <link rel="icon" href="https://kerimmc1.github.io/kerimmc/Logo.jpeg" type="image/jpeg">
     <link rel="apple-touch-icon" href="https://kerimmc1.github.io/kerimmc/Logo.jpeg">
 
     <!-- Open Graph (Sosyal Medya Paylaşımları İçin - WhatsApp, Discord, FB) -->
@@ -739,17 +740,31 @@
             /* Sekmeleri yatay kaydırılabilir yapalım, böylece alta inip sıkışmazlar */
             .tab-container {
                 overflow-x: auto;
-                padding-bottom: 8px;
-                -ms-overflow-style: none;  
-                scrollbar-width: none;  
+                padding-bottom: 12px;
+                -ms-overflow-style: auto;  
+                scrollbar-width: thin;  
+                scrollbar-color: var(--mc-blue) var(--panel-bg);
             }
+            /* Mobilde ince ve estetik bir kaydırma çubuğu göstererek sağa kaydığı anlaşılsın */
             .tab-container::-webkit-scrollbar {
-                display: none;
+                display: block;
+                height: 4px;
             }
+            .tab-container::-webkit-scrollbar-track {
+                background: var(--bg-color);
+                border-radius: 2px;
+            }
+            .tab-container::-webkit-scrollbar-thumb {
+                background: var(--mc-blue);
+                border-radius: 2px;
+            }
+            /* 3. sekmenin sağdan hafifçe taşarak (peeking) kaydırılabileceğinin sezilmesini sağlayalım */
             .tab-btn {
+                flex: 0 0 45%; 
                 white-space: nowrap; /* Yazıların alt satıra inmesini engeller */
                 font-size: 0.9rem;
                 padding: 10px 14px;
+                text-align: center;
             }
 
             /* Mod kartlarını mobilde daha kompakt hale getirelim */
