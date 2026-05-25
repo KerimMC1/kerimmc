@@ -850,11 +850,11 @@
         <h1>KerimMC</h1>
         <p class="subtitle">Minecraft Bedrock Mod ve Texture Pack </p>
         <div class="social-grid">
-            <a href="https://www.youtube.com/@KerimMinecraft" target="_blank" class="social-btn"><img src="Youtube.png"
+            <a href="https://www.youtube.com/@KerimMinecraft" target="_blank" class="social-btn" onclick="trackSocial('YouTube')"><img src="Youtube.png"
                     alt="YT"> YouTube</a>
-            <a href="https://www.tiktok.com/@kerim.mc" target="_blank" class="social-btn"><img src="Tiktok.png"
+            <a href="https://www.tiktok.com/@kerim.mc" target="_blank" class="social-btn" onclick="trackSocial('TikTok')"><img src="Tiktok.png"
                     alt="TT"> TikTok</a>
-            <a href="https://whatsapp.com/channel/0029Vb5fdHO1yT228RdE3H2Q" target="_blank" class="social-btn"><img
+            <a href="https://whatsapp.com/channel/0029Vb5fdHO1yT228RdE3H2Q" target="_blank" class="social-btn" onclick="trackSocial('WhatsApp')"><img
                     src="Whatsapp.png" alt="WP"> WhatsApp</a>
         </div>
     </div>
@@ -1182,8 +1182,29 @@
             }
         }
 
+        // 📊 Sosyal Medya Tıklamalarını Takip Et
+        function trackSocial(platform) {
+            if (typeof gtag === 'function') {
+                gtag('event', 'social_click', {
+                    'platform': platform
+                });
+            }
+        }
+
         // 📥 Mod/Paket İndirme Tıklama Sayacı (Firebase - 24 Saatte Bir Benzersiz Tıklama)
         function trackDownload(itemId) {
+            // Google Analytics ile hangi modun tıklandığını detaylı takip et
+            const item = ITEMS_DATA.find(i => i.id === itemId);
+            const itemTitle = item ? item.title : itemId;
+            const itemCategory = item ? item.category : 'unknown';
+            if (typeof gtag === 'function') {
+                gtag('event', 'download_click', {
+                    'item_id': itemId,
+                    'item_name': itemTitle,
+                    'item_category': itemCategory
+                });
+            }
+
             if (!firebaseDB) return;
 
             const localKey = `downloaded_${itemId}`;
@@ -1455,6 +1476,12 @@
                                 alert("Rapor iletilirken bir hata oluştu! Lütfen Firebase kurallarınızı kontrol edin.");
                                 localStorage.removeItem(localKey);
                             } else if (committed) {
+                                // Google Analytics'e hata raporunu gönder
+                                if (typeof gtag === 'function') {
+                                    gtag('event', 'report_error', {
+                                        'item_name': modName
+                                    });
+                                }
                                 alert(`✅ Hata şikayetiniz başarıyla alındı. İlginiz için çok teşekkür ederiz!`);
                             }
                         });
